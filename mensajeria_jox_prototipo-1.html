@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#12345a">
+<title>Mensajería JOX</title>
+<style>
+:root{--navy:#12345a;--blue:#174f91;--red:#d52b3f;--ink:#182536;--muted:#687789;--bg:#f3f6fa}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+header{background:linear-gradient(145deg,#102c4e,#174f91);color:#fff;padding:28px 20px 30px;border-bottom:7px solid var(--red)}
+.wrap{max-width:620px;margin:auto}.flag{display:flex;width:90px;height:8px;margin-bottom:18px;border-radius:9px;overflow:hidden}.flag i{flex:1}.flag i:nth-child(1),.flag i:nth-child(5){background:#174f91}.flag i:nth-child(2),.flag i:nth-child(4){background:#fff}.flag i:nth-child(3){background:var(--red)}
+h1{font-size:27px;letter-spacing:1.2px;margin:0 0 7px}.tag{margin:0;color:#e8f0fa;font-size:14px}
+main{padding:20px 15px 36px}.intro{margin:0 0 17px;color:var(--muted);line-height:1.45;font-size:14px}
+.card{background:#fff;border-radius:18px;padding:19px;box-shadow:0 5px 22px #102c4e12;margin-bottom:15px}
+h2{font-size:18px;margin:0 0 15px;color:var(--navy)}
+label{display:block;font-size:13px;font-weight:700;margin:13px 0 6px}
+input,select,textarea{width:100%;border:1px solid #d5deea;border-radius:10px;padding:12px;font-size:15px;background:#fff;color:var(--ink)}
+textarea{min-height:82px;resize:vertical}
+button{width:100%;border:0;border-radius:12px;background:var(--red);color:#fff;padding:15px;font-size:16px;font-weight:700;margin-top:18px}
+.note{font-size:12px;color:var(--muted);line-height:1.5;margin:12px 0 0}
+.pills{display:flex;flex-wrap:wrap;gap:8px}.pill{background:#edf3fa;color:var(--navy);padding:8px 11px;border-radius:20px;font-size:12px;font-weight:700}
+footer{text-align:center;padding:0 16px 25px;color:var(--muted);font-size:12px}
+a{color:inherit}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="flag"><i></i><i></i><i></i><i></i><i></i></div>
+  <h1>MENSAJERÍA JOX</h1>
+  <p class="tag">Hacemos tu vida más fácil · Quepos y alrededores</p>
+</div></header>
+<main class="wrap">
+  <p class="intro">¡Hola! Solicitá tu mandado desde aquí. Completá los datos y enviaremos tu solicitud por WhatsApp para confirmar disponibilidad y precio.</p>
+  <section class="card">
+    <h2>Solicitar un servicio</h2>
+    <form id="order">
+      <label for="name">Tu nombre</label><input id="name" required placeholder="Nombre y apellido">
+      <label for="phone">Tu teléfono</label><input id="phone" required type="tel" placeholder="Ej. 8888-8888">
+      <label for="kind">Tipo de servicio</label>
+      <select id="kind" required>
+        <option value="">Seleccioná un servicio</option>
+        <option>Compras en supermercado</option><option>Farmacia / retiro de medicinas</option>
+        <option>Restaurante o soda</option><option>Entrega o retiro de paquetes</option>
+        <option>Trámites y pagos</option><option>Depósitos o diligencias bancarias</option>
+        <option>Otro mandado</option>
+      </select>
+      <label for="pickup">Dirección para recoger / punto de compra</label><input id="pickup" required placeholder="Barrio, comercio o dirección">
+      <label for="drop">Dirección de entrega</label><input id="drop" required placeholder="Barrio, señas o ubicación">
+      <label for="details">Detalles del mandado</label><textarea id="details" placeholder="Indicá qué necesitás y cualquier detalle importante"></textarea>
+      <label for="payment">Forma de pago preferida</label>
+      <select id="payment"><option>Efectivo</option><option>SINPE Móvil</option></select>
+      <button type="submit">Enviar solicitud por WhatsApp</button>
+      <p class="note">Enviar la solicitud no confirma el servicio ni fija el precio. Mensajería JOX te responderá para confirmar costo, disponibilidad y condiciones.</p>
+    </form>
+  </section>
+  <section class="card">
+    <h2>Estamos a la orden</h2>
+    <div class="pills"><span class="pill">Efectivo</span><span class="pill">SINPE Móvil: 61030059</span><span class="pill">WhatsApp: 8650-9261</span></div>
+    <p class="note">Por ahora, esta primera versión envía los pedidos a WhatsApp. El panel privado y el seguimiento GPS se agregarán en las siguientes etapas.</p>
+  </section>
+</main>
+<footer>© Mensajería JOX · Quepos y alrededores</footer>
+<script>
+document.getElementById('order').addEventListener('submit',function(e){
+ e.preventDefault();
+ const v=id=>document.getElementById(id).value.trim();
+ const msg=[
+ 'Hola, Mensajería JOX. Quiero solicitar un servicio:',
+ 'Nombre: '+v('name'),'Teléfono: '+v('phone'),'Servicio: '+v('kind'),
+ 'Recoger en: '+v('pickup'),'Entregar en: '+v('drop'),
+ 'Detalles: '+(v('details')||'No indicados'),'Pago preferido: '+v('payment')
+ ].join('\n');
+ window.open('https://wa.me/50686509261?text='+encodeURIComponent(msg),'_blank');
+});
+</script>
+</body>
+</html>
